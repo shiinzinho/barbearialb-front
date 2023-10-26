@@ -170,6 +170,9 @@ const CadastroCliente = () => {
                                     <label htmlFor="senha" className='form-label'>Senha</label>
                                     <input type="password" name='senha' className='form-control' required onChange={handleState} />
                                 </div>
+                                <div className='col-12'>
+                                    <button type='submit' className='btn btn-success btn-sm' >Cadastrar</button>
+                                </div>
                             </form>
                         </div>
                     </div>
