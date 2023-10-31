@@ -20,6 +20,7 @@ const CadastroCliente = () => {
     const [bairro, setBairro] = useState<string>("")
     const [complemento, setComplemento] = useState<string>("")
     const [senha, setSenha] = useState<string>("")
+    const [pesquisaCep, setPesquisaCep] = useState<string>("")
 
     const CadastrarCliente = (e: FormEvent) => {
         e.preventDefault();
@@ -39,7 +40,7 @@ const CadastroCliente = () => {
         numero: numero,
         bairro: bairro,
         complemento: complemento,
-        senha: senha
+        senha: senha,
     }
 
     axios.post('http://127.0.0.1:8000/api/client', dados, {

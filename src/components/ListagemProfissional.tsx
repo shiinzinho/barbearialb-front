@@ -79,16 +79,17 @@ const ListagemProfissional = () => {
                                     <tr>
                                         <th>ID</th>
                                         <th>Nome</th>
+                                        <th>Celular</th>
                                         <th>E-mail</th>
                                         <th>CPF</th>
                                         <th>Data de Nascimento</th>
+                                        <th>CEP</th>
                                         <th>Cidade</th>
                                         <th>Estado</th>
                                         <th>País</th>
                                         <th>Rua</th>
                                         <th>Número</th>
                                         <th>Bairro</th>
-                                        <th>CEP</th>
                                         <th>Complemento</th>
                                         <th>Senha</th>
                                         <th>Salário</th>
@@ -103,13 +104,13 @@ const ListagemProfissional = () => {
                                             <td>{usuario.email}</td>
                                             <td>{usuario.cpf}</td>
                                             <td>{usuario.dataNascimento}</td>
+                                            <td>{usuario.cep}</td>
                                             <td>{usuario.cidade}</td>
                                             <td>{usuario.estado}</td>
                                             <td>{usuario.pais}</td>
                                             <td>{usuario.rua}</td>
                                             <td>{usuario.numero}</td>
                                             <td>{usuario.bairro}</td>
-                                            <td>{usuario.cep}</td>
                                             <td>{usuario.complemento}</td>
                                             <td>{usuario.senha}</td>
                                             <td>{usuario.salario}</td>
