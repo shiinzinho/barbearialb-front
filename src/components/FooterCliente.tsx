@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./Footer.module.css"
 
-const Footer = () => {
+const FooterCliente = () => {
     return(
     <footer className={styles.footer}>
         <p>
-           <span> Buscador de CEP</span> @<a target="_blank" href="https://www.sp.senai.br/">SENAI</a>
+           <span> Cadastro de Clientes </span> @<a target="_blank" href="https://www.sp.senai.br/">SENAI</a>
         </p>
         </footer>
         );
     }
-export default Footer;
+export default FooterCliente;

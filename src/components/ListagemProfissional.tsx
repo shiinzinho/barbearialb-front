@@ -20,7 +20,7 @@ const ListagemProfissional = () => {
 
         async function fetchData() {
             try{
-                const response = await axios.post('http://10.137.9.134:8000/api/findNome',
+                const response = await axios.post('http://127.0.0.1:8000/api/professional/name',
                 {nome: pesquisa},
                 {
                     headers: {
@@ -41,7 +41,7 @@ const ListagemProfissional = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://10.137.9.134:8000/api/find');
+                const response = await axios.get('http://127.0.0.1:8000/api/professional/all');
                 setUsuarios(response.data.data)
             } catch (error) {
                 setError("Ocorreu um erro");

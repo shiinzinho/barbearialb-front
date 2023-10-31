@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import Footer from './Footer';
+import FooterCliente from './FooterCliente';
 import Header from './Header';
 import styles from '../App.module.css'
 import axios from 'axios';
@@ -11,13 +11,13 @@ const CadastroCliente = () => {
     const [email, setEmail] = useState<string>("")
     const [cpf, setCpf] = useState<string>("")
     const [dataNascimento, setDataNascimento] = useState<string>("")
+    const [cep, setCep] = useState<string>("")
     const [cidade, setCidade] = useState<string>("")
     const [estado, setEstado] = useState<string>("")
     const [pais, setPais] = useState<string>("")
     const [rua, setRua] = useState<string>("")
     const [numero, setNumero] = useState<string>("")
     const [bairro, setBairro] = useState<string>("")
-    const [cep, setCep] = useState<string>("")
     const [complemento, setComplemento] = useState<string>("")
     const [senha, setSenha] = useState<string>("")
 
@@ -31,13 +31,13 @@ const CadastroCliente = () => {
         email: email,
         cpf: cpf,
         dataNascimento: dataNascimento,
+        cep: cep,
         cidade: cidade,
         estado: estado,
         pais: pais,
         rua: rua,
         numero: numero,
         bairro: bairro,
-        cep: cep,
         complemento: complemento,
         senha: senha
     }
@@ -75,6 +75,9 @@ const CadastroCliente = () => {
         if (e.target.name === "dataNascimento") {
             setDataNascimento(e.target.value)
         }
+        if (e.target.name === "cep") {
+            setCep(e.target.value)
+        }
         if (e.target.name === "cidade") {
             setCidade(e.target.value)
         }
@@ -93,9 +96,6 @@ const CadastroCliente = () => {
         if (e.target.name === "bairro") {
             setBairro(e.target.value)
         }
-        if (e.target.name === "cep") {
-            setCep(e.target.value)
-        }
         if (e.target.name === "complemento") {
             setComplemento(e.target.value)
         }
@@ -103,8 +103,21 @@ const CadastroCliente = () => {
             setSenha(e.target.value)
         }
     }
-    
 
+    const findCep = (e: FormEvent) => {
+        e.preventDefault()
+
+        fetch('https://viacep.com.br/ws/'+ cep +'/json/', {method: 'GET'})
+        .then(response => response.json())
+        .then(data => {
+            setCidade(data.localidade)
+            setCep(data.cep)
+            setEstado(data.uf)
+           
+        })
+        .catch(error => {console.log('Pesquisa Inválida')})
+        }
+    
     return (
         <div>
             <Header />
@@ -132,15 +145,19 @@ const CadastroCliente = () => {
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="dataNascimento" className='form-label'>Data de Nascimento</label>
-                                    <input type="text" name='dataNascimento' className='form-control' required onChange={handleState} />
+                                    <input type="date" name='dataNascimento' className='form-control' required onChange={handleState} />
+                                </div>
+                                <div className='col-4'>
+                                    <label htmlFor="cep" className='form-label'>CEP</label>
+                                    <input type="text" name='cep' className='form-control' required onBlur={findCep} onChange={handleState} />
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="cidade" className='form-label'>Cidade</label>
-                                    <input type="text" name='cidade' className='form-control' required onChange={handleState} />
+                                    <input type="text" name='cidade' value={cidade} className='form-control' required onChange={handleState} />
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="estado" className='form-label'>Estado</label>
-                                    <input type="text" name='estado' className='form-control' required onChange={handleState} />
+                                    <input type="text" name='estado' value={estado} className='form-control' required onChange={handleState} />
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="pais" className='form-label'>País</label>
@@ -159,10 +176,6 @@ const CadastroCliente = () => {
                                     <input type="text" name='bairro' className='form-control' required onChange={handleState} />
                                 </div>
                                 <div className='col-4'>
-                                    <label htmlFor="cep" className='form-label'>CEP</label>
-                                    <input type="text" name='cep' className='form-control' required onChange={handleState} />
-                                </div>
-                                <div className='col-4'>
                                     <label htmlFor="complemento" className='form-label'>Complemento</label>
                                     <input type="text" name='complemento' className='form-control' required onChange={handleState} />
                                 </div>
@@ -178,7 +191,7 @@ const CadastroCliente = () => {
                     </div>
                 </div>
             </main>
-            <Footer />
+            <FooterCliente />
         </div>
     );
 }
