@@ -41,6 +41,7 @@ const CadastroCliente = () => {
         bairro: bairro,
         complemento: complemento,
         senha: senha,
+        pesquisaCep: pesquisaCep,
     }
 
     axios.post('http://127.0.0.1:8000/api/client', dados, {
@@ -112,7 +113,7 @@ const CadastroCliente = () => {
         .then(response => response.json())
         .then(data => {
             setCidade(data.localidade)
-            setCep(data.cep)
+            setPesquisaCep(data.cep)
             setEstado(data.uf)
            
         })

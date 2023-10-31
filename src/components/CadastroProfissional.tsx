@@ -23,6 +23,7 @@ const CadastroProfissional = () => {
     const [complemento, setComplemento] = useState<string>("")
     const [senha, setSenha] = useState<string>("")
     const [salario, setSalario] = useState<string>("")
+    const [pesquisaCep, setPesquisaCep] = useState<string>("")
 
     const CadastrarProfissional = (e:FormEvent) => {
         e.preventDefault();
@@ -43,6 +44,7 @@ const CadastroProfissional = () => {
         complemento: complemento,
         senha: senha,
         salario: salario,
+        pesquisaCep: pesquisaCep,
     }
     
     axios.post('http://127.0.0.1:8000/api/professional', dados, {
@@ -117,7 +119,7 @@ const CadastroProfissional = () => {
         .then(response => response.json())
         .then(data => {
             setCidade(data.localidade)
-            setCep(data.cep)
+            setPesquisaCep(data.cep)
             setEstado(data.uf)
            
         })
