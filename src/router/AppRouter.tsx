@@ -12,6 +12,7 @@ import EditarProfissional from '../components/EditarProfissional';
 
 import CadastroServico from '../components/CadastroServico';
 import ListagemServico from '../components/ListagemServico';
+import EditarServico from '../components/EditarServico';
 
 const AppRouter = () => {
    return (
@@ -24,9 +25,10 @@ const AppRouter = () => {
         <Route path='CadastroProfissional' element={<CadastroProfissional />}/>
         <Route path='ListagemProfissional' element={<ListagemProfissional />}/>
         <Route path='EditarProfissional/:id' element={<EditarProfissional />}/>
-        
+
         <Route path='CadastroServico' element={<CadastroServico />}/>
         <Route path='ListagemServico' element={<ListagemServico />}/>
+        <Route path='EditarServico/:id' element={<EditarServico />}/>
     </Routes>
     </BrowserRouter>
    );
