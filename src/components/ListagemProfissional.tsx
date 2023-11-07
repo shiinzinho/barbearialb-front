@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import styles from "../App.module.css";
 import { CadastroProfissionalInterface } from '../interfaces/CadastroProfissionalInterface';
+import { Link } from 'react-router-dom';
 
 const ListagemProfissional = () => {
     const [usuarios, setUsuarios] = useState<CadastroProfissionalInterface[]>([]);
@@ -115,8 +116,8 @@ const ListagemProfissional = () => {
                                             <td>{usuario.senha}</td>
                                             <td>{usuario.salario}</td>
                                             <td>
-                                                <a href="#" className='btn btn-primary btn-sm'>Editar</a>
-                                                <a href="#" className='btn btn-danger btn-sm'>Excluir</a>
+                                                <Link to={"/EditarProfissional/" + usuario.id} className='btn btn-primary btn-sm'>Editar</Link>
+                                                <Link to={""} className='btn btn-danger btn-sm'>Excluir</Link>
                                             </td>
                                         </tr>
                                     ))}

@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import styles from "../App.module.css";
 import { CadastroClienteInterface } from '../interfaces/CadastroClienteInterface';
+import { Link } from 'react-router-dom';
 
 const ListagemCliente = () => {
     const [usuarios, setUsuarios] = useState<CadastroClienteInterface[]>([]);
@@ -113,8 +114,8 @@ const ListagemCliente = () => {
                                             <td>{usuario.complemento}</td>
                                             <td>{usuario.senha}</td>
                                             <td>
-                                                <a href="#" className='btn btn-primary btn-sm'>Editar</a>
-                                                <a href="#" className='btn btn-danger btn-sm'>Excluir</a>
+                                                <Link to={"/EditarCliente/" + usuario.id} className='btn btn-primary btn-sm'>Editar</Link>
+                                                <Link to={""} className='btn btn-danger btn-sm'>Excluir</Link>
                                             </td>
                                         </tr>
                                     ))}
