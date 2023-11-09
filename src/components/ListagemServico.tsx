@@ -4,12 +4,24 @@ import React, {
 } from 'react';
 import styles from "../App.module.css";
 import { CadastroServicoInterface } from '../interfaces/CadastroServicoInterface';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ListagemServico = () => {
     const [usuarios, setUsuarios] = useState<CadastroServicoInterface[]>([]);
     const [pesquisa, setPesquisa] = useState<string>('');
     const [error, setError] = useState("");
+    const navigate = useNavigate()
+
+    function handleDelete(id: number) {
+        const confirm = window.confirm('Você tem certeza que deseja excluir?');
+        if (confirm)
+            axios.delete('http://127.0.0.1:8000/api/service/delete/' + id)
+        .then(function(response){
+            window.location.href = "/ListagemCliente"
+        }).catch(function(error){
+            console.log('Ocorreu um erro ao excluir');
+        })
+    }
 
     const handleState = (e: ChangeEvent<HTMLInputElement>) => {
         if(e.target.name === "pesquisa"){
@@ -95,7 +107,7 @@ const ListagemServico = () => {
                                             <td>{usuario.preco}</td>
                                             <td>
                                                 <Link to={"/EditarServico/" + usuario.id} className='btn btn-primary btn-sm'>Editar</Link>
-                                                <Link to={""} className='btn btn-danger btn-sm'>Excluir</Link>
+                                                <a onClick={e => handleDelete(usuario.id)} className='btn btn-danger btn-sm'>Excluir</a>
                                             </td>
                                         </tr>
                                     ))}

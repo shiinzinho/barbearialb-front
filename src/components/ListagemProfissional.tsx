@@ -4,12 +4,24 @@ import React, {
 } from 'react';
 import styles from "../App.module.css";
 import { CadastroProfissionalInterface } from '../interfaces/CadastroProfissionalInterface';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ListagemProfissional = () => {
     const [usuarios, setUsuarios] = useState<CadastroProfissionalInterface[]>([]);
     const [pesquisa, setPesquisa] = useState<string>('');
     const [error, setError] = useState("");
+    const navigate = useNavigate()
+
+    function handleDelete(id: number) {
+        const confirm = window.confirm('Você tem certeza que deseja excluir?');
+        if (confirm)
+            axios.delete('http://127.0.0.1:8000/api/professional/delete/' + id)
+        .then(function(response){
+            window.location.href = "/ListagemCliente"
+        }).catch(function(error){
+            console.log('Ocorreu um erro ao excluir');
+        })
+    }
 
     const handleState = (e: ChangeEvent<HTMLInputElement>) => {
         if(e.target.name === "pesquisa"){
@@ -92,7 +104,6 @@ const ListagemProfissional = () => {
                                         <th>Número</th>
                                         <th>Bairro</th>
                                         <th>Complemento</th>
-                                        <th>Senha</th>
                                         <th>Salário</th>
                                     </tr>
                                 </thead>
@@ -113,11 +124,10 @@ const ListagemProfissional = () => {
                                             <td>{usuario.numero}</td>
                                             <td>{usuario.bairro}</td>
                                             <td>{usuario.complemento}</td>
-                                            <td>{usuario.senha}</td>
                                             <td>{usuario.salario}</td>
                                             <td>
                                                 <Link to={"/EditarProfissional/" + usuario.id} className='btn btn-primary btn-sm'>Editar</Link>
-                                                <Link to={""} className='btn btn-danger btn-sm'>Excluir</Link>
+                                                <a onClick={e => handleDelete(usuario.id)} className='btn btn-danger btn-sm'>Excluir</a>
                                             </td>
                                         </tr>
                                     ))}

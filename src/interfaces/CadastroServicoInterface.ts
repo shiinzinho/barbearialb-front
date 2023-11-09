@@ -1,5 +1,5 @@
 export interface CadastroServicoInterface {
-    id: string,
+    id: number,
     nome: string,
     descricao: string,
     duracao: string,

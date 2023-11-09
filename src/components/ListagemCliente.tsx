@@ -4,36 +4,49 @@ import React, {
 } from 'react';
 import styles from "../App.module.css";
 import { CadastroClienteInterface } from '../interfaces/CadastroClienteInterface';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const ListagemCliente = () => {
     const [usuarios, setUsuarios] = useState<CadastroClienteInterface[]>([]);
     const [pesquisa, setPesquisa] = useState<string>('');
     const [error, setError] = useState("");
+    const   navigate = useNavigate()
+
+
+    function handleDelete(id: number) {
+        const confirm = window.confirm('Você tem certeza que deseja excluir?');
+        if (confirm)
+            axios.delete('http://127.0.0.1:8000/api/client/delete/' + id)
+        .then(function(response){
+            window.location.href = "/ListagemCliente"
+        }).catch(function(error){
+            console.log('Ocorreu um erro ao excluir');
+        })
+    }
 
     const handleState = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e.target.name === "pesquisa"){
+        if (e.target.name === "pesquisa") {
             setPesquisa(e.target.value);
         }
     }
-    const buscar = (e:FormEvent) => {
+      const buscar = (e: FormEvent) => {
         e.preventDefault();
 
         async function fetchData() {
-            try{
+            try {
                 const response = await axios.post('http://127.0.0.1:8000/api/client/name',
-                {nome: pesquisa},
-                {
-                    headers: {
-                        "Accept" : "application/json",
-                        "Content-Type" : "application/json"
-                    }
-                }).then(function(response){
-                    setUsuarios(response.data.data);
-                }).catch(function(error){
-                    console.log(error);
-                })
-            } catch(error){
+                    { nome: pesquisa },
+                    {
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        }
+                    }).then(function (response) {
+                        setUsuarios(response.data.data);
+                    }).catch(function (error) {
+                        console.log(error);
+                    })
+            } catch (error) {
                 console.log(error);
             }
         }
@@ -62,7 +75,7 @@ const ListagemCliente = () => {
                                     <h5>Pesquisar</h5>
                                     <form className='row' onSubmit={buscar}>
                                         <div className='col-10'>
-                                            <input type="text" name='pesquisa' className='form-control' onChange={handleState}/>
+                                            <input type="text" name='pesquisa' className='form-control' onChange={handleState} />
                                         </div>
                                         <div className='col-1'>
                                             <button type='submit' className='btn btn-success'>Pesquisar</button>
@@ -92,7 +105,6 @@ const ListagemCliente = () => {
                                         <th>Número</th>
                                         <th>Bairro</th>
                                         <th>Complemento</th>
-                                        <th>Senha</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -112,10 +124,9 @@ const ListagemCliente = () => {
                                             <td>{usuario.numero}</td>
                                             <td>{usuario.bairro}</td>
                                             <td>{usuario.complemento}</td>
-                                            <td>{usuario.senha}</td>
                                             <td>
                                                 <Link to={"/EditarCliente/" + usuario.id} className='btn btn-primary btn-sm'>Editar</Link>
-                                                <Link to={""} className='btn btn-danger btn-sm'>Excluir</Link>
+                                                <a onClick={e => handleDelete(usuario.id)} className='btn btn-danger btn-sm'>Excluir</a>
                                             </td>
                                         </tr>
                                     ))}
