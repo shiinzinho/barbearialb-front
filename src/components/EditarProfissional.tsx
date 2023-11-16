@@ -4,6 +4,8 @@ import Header from "./Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import FooterProfissional from "./FooterProfissional";
+import FooterProfissionalUpdate from "./FooterProfissionalUpdate";
+import Swal from "sweetalert2";
 
 
 
@@ -61,7 +63,26 @@ const EditarProfissional = () => {
                 "Content-Type": "applcation/json"
             }
         }).then(function(response){
-            window.location.href = "/ListagemProfissional"
+            if(response.data.status === true){
+                Swal.fire({
+                    title: "Concluído",
+                    text: "Profissional Atualizado",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+                window.setTimeout(() => {
+                    window.location.href = "/ListagemProfissional"
+                }, 1000);
+            } else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Alguma coisa está errada",
+                  });
+                console.log("error");
+                console.log(response.data.error);
+            }
         }).catch(function(error){
             console.log('Ocorreu um erro ao atualizar');
         })
@@ -234,7 +255,7 @@ const EditarProfissional = () => {
                     </div>
                 </div>
             </main>
-            <FooterProfissional />
+            <FooterProfissionalUpdate />
         </div>
     );
 }

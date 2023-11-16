@@ -6,6 +6,7 @@ import CadastroCliente from '../components/CadastroCliente';
 import ListagemCliente from '../components/ListagemCliente';
 import EditarCliente from '../components/EditarCliente';
 
+
 import CadastroProfissional from '../components/CadastroProfissional';
 import ListagemProfissional from '../components/ListagemProfissional';
 import EditarProfissional from '../components/EditarProfissional';
@@ -13,6 +14,10 @@ import EditarProfissional from '../components/EditarProfissional';
 import CadastroServico from '../components/CadastroServico';
 import ListagemServico from '../components/ListagemServico';
 import EditarServico from '../components/EditarServico';
+
+import CadastroAgenda from '../components/CadastroAgenda';
+import ListagemAgenda from '../components/ListagemAgenda';
+import EditarAgenda from '../components/EditarAgenda';
 
 const AppRouter = () => {
    return (
@@ -29,6 +34,10 @@ const AppRouter = () => {
         <Route path='CadastroServico' element={<CadastroServico />}/>
         <Route path='ListagemServico' element={<ListagemServico />}/>
         <Route path='EditarServico/:id' element={<EditarServico />}/>
+
+        <Route path='CadastroAgenda' element={<CadastroAgenda />}/>
+        <Route path='ListagemAgenda' element={<ListagemAgenda />}/>
+        <Route path='EditarAgenda/:id' element={<EditarAgenda />}/>
     </Routes>
     </BrowserRouter>
    );

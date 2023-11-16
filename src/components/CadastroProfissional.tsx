@@ -5,6 +5,7 @@ import Header from './Header';
 import styles from '../App.module.css'
 import axios from 'axios';
 import FooterProfissional from './FooterProfissional';
+import Swal from 'sweetalert2';
 
 const CadastroProfissional = () => {
 
@@ -53,11 +54,25 @@ const CadastroProfissional = () => {
             "Content-Type": "application/json"
         }
     }).then(function (response) {
-        if (response.data.success = false) {
+        if (response.data.success === false) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Alguma coisa está errada",
+              });
             console.log("error");
             console.log(response.data.error);
         } else {
-            window.location.href = "/ListagemProfissional"
+            Swal.fire({
+                title: "Concluído",
+                text: "Profissional Cadastrado",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000
+              });
+            window.setTimeout(() => {
+                window.location.href = "/ListagemProfissional"
+            }, 1000);
         }
     }).catch(function (error) {
         console.log(error);;

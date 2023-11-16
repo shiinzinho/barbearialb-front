@@ -4,6 +4,8 @@ import Header from "./Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import FooterCliente from "./FooterCliente";
+import FooterClienteUpdate from "./FooterClienteUpdate";
+import Swal from "sweetalert2";
 
 
 
@@ -60,7 +62,26 @@ const EditarCliente = () => {
                 "Content-Type": "applcation/json"
             }
         }).then(function(response){
-            window.location.href = "/ListagemCliente"
+            if(response.data.status === true){
+                Swal.fire({
+                    title: "Concluído",
+                    text: "Cliente Atualizado",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+                window.setTimeout(() => {
+                    window.location.href = "/ListagemCliente"
+                }, 1000);
+            } else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Alguma coisa está errada",
+                  });
+                console.log("error");
+                console.log(response.data.error);
+            }
         }).catch(function(error){
             console.log('Ocorreu um erro ao atualizar');
         })
@@ -225,7 +246,7 @@ const EditarCliente = () => {
                     </div>
                 </div>
             </main>
-            <FooterCliente />
+            <FooterClienteUpdate />
         </div>
     );
 }

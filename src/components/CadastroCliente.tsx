@@ -3,6 +3,8 @@ import FooterCliente from './FooterCliente';
 import Header from './Header';
 import styles from '../App.module.css'
 import axios from 'axios';
+import { time } from 'console';
+import Swal from 'sweetalert2';
 
 const CadastroCliente = () => {
 
@@ -50,11 +52,25 @@ const CadastroCliente = () => {
             "Content-Type": "application/json"
         }
     }).then(function (response) {
-        if (response.data.success = false) {
+        if (response.data.success === false) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Alguma coisa está errada",
+              });
             console.log("error");
             console.log(response.data.error);
         } else {
-            window.location.href = "/ListagemCliente"
+            Swal.fire({
+                title: "Concluído",
+                text: "Cliente Cadastrado",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000
+              });
+            window.setTimeout(() => {
+                window.location.href = "/ListagemCliente"
+            }, 1000);
         }
     }).catch(function (error) {
         console.log(error);;
