@@ -8,7 +8,7 @@ import FooterAgenda from './FooterAgenda';
 
 const CadastroAgenda = () => {
 
-    const [profissional_id, setProfissional_id] = useState<string>("")
+    const [profissional_id, setProfissional_id] = useState<string>()
     const [data_hora, setData_hora] = useState<string>("")
 
     const CadastrarAgenda = (e:FormEvent) => {
@@ -55,11 +55,11 @@ const CadastroAgenda = () => {
                         <div className='card-body'>
                             <h5 className='card-title'>Cadastrar Agenda</h5>
                             <form onSubmit={CadastrarAgenda} className='row g-3'>
-                                <div className='col-12'>
+                                <div className='col-6'>
                                     <label htmlFor="profissional_id" className='form-label'>ID do Profissional</label>
                                     <input type="integer" name='profissional_id' className='form-control' required onChange={handleState}/>
                                 </div>
-                                <div className='col-12'>
+                                <div className='col-6'>
                                     <label htmlFor="data_hora" className='form-label'>Data e hora</label>
                                     <input type="datetime-local" name='data_hora' className='form-control' required onChange={handleState}/>
                                 </div>

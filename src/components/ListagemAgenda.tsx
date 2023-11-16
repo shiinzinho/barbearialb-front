@@ -49,12 +49,12 @@ const ListagemAgenda = () => {
                                     <tr>
                                         <th>ID do Profissional</th>
                                         <th>Data e Hora</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {usuarios.map(usuario => (
                                         <tr key={usuario.id}>
-                                            <td>{usuario.id}</td>
                                             <td>{usuario.profissional_id}</td>
                                             <td>{usuario.data_hora}</td>
                                             <td>

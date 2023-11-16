@@ -5,14 +5,15 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Footer from "./FooterAgenda";
 import FooterAgenda from "./FooterAgenda";
+import FooterAgendaUpdate from "./FooterAgendaUpdate";
 
 
 
 const EditarAgenda = () => {
 
-    const [id, setId] = useState<number>()
-    const [profissionalId, setProfissionalId] = useState<string>("")
-    const [dataHora, setDataHora] = useState<string>("")
+    const [id, setId] = useState<string>()
+    const [profissional_id, setProfissional_id] = useState<string>()
+    const [data_hora, setData_hora] = useState<string>("")
 
 
     const parametro = useParams();
@@ -23,8 +24,8 @@ const EditarAgenda = () => {
 
         const dados = {
             id: id,
-            profissionalId: profissionalId,
-            dataHora: dataHora,
+            profissional_id: profissional_id,
+            data_hora: data_hora,
 
         }
         axios.put('http://127.0.0.1:8000/api/schedule/update', dados, 
@@ -34,7 +35,7 @@ const EditarAgenda = () => {
                 "Content-Type": "applcation/json"
             }
         }).then(function(response){
-            window.location.href = "/ListagemServico"
+            window.location.href = "/ListagemAgenda"
         }).catch(function(error){
             console.log('Ocorreu um erro ao atualizar');
         })
@@ -45,8 +46,8 @@ const EditarAgenda = () => {
             try {
                 const response = await axios.get('http://127.0.0.1:8000/api/schedule/find/' + parametro.id)
                 setId(response.data.data.id)
-                setProfissionalId(response.data.data.nome)
-                setDataHora(response.data.data.descricao)
+                setProfissional_id(response.data.data.profissional_id)
+                setData_hora(response.data.data.data_hora)
 
             } catch (error) {
                 console.log('Erro ao buscar dados da api');
@@ -56,11 +57,11 @@ const EditarAgenda = () => {
     }, []);
 
     const handleState = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e.target.name === "nome"){
-            setProfissionalId(e.target.value)
+        if(e.target.name === "profissional_id"){
+            setProfissional_id(e.target.value)
         }
-        if(e.target.name === "descricao"){
-            setDataHora(e.target.value)
+        if(e.target.name === "data_hora"){
+            setData_hora(e.target.value)
         }
     }
 
@@ -72,22 +73,25 @@ const EditarAgenda = () => {
                 <div className='container'>
                     <div className='card'>
                         <div className='card-body'>
-                            <h5 className='card-title'>Atualizar Serviço</h5>
+                            <h5 className='card-title'>Atualizar Agenda</h5>
                             <form onSubmit={atualizar} className='row g-3'>
                                 <div className='col-6'>
-                                    <label htmlFor="ProfissionalId" className='form-label'>ID do Profissional</label>
-                                    <input type="text" name='profissionalId' className='form-control' required onChange={handleState} value={profissionalId} />
+                                    <label htmlFor="Profissional_id" className='form-label'>ID do Profissional</label>
+                                    <input type="text" name='profissional_id' className='form-control' required onChange={handleState} value={profissional_id} />
                                 </div>
                                 <div className='col-6'>
-                                    <label htmlFor="DataHora" className='form-label'>Data e Hora</label>
-                                    <input type="date" name='dataHora' className='form-control' required onChange={handleState} value={dataHora} />
+                                    <label htmlFor="data_hora" className='form-label'>Data e Hora</label>
+                                    <input type="datetime-local" name='data_hora' className='form-control' required onChange={handleState} value={data_hora} />
+                                </div>
+                                <div className='col-12'>
+                                    <button type='submit' className='btn btn-success btn-sm' >Atualizar</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </main>
-            <FooterAgenda />
+            <FooterAgendaUpdate />
         </div>
     );
 }
