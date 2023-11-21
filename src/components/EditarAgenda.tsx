@@ -3,16 +3,16 @@ import styles from "../App.module.css"
 import Header from "./Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Footer from "./FooterAgenda";
 import FooterAgenda from "./FooterAgenda";
+import Swal from "sweetalert2";
 import FooterAgendaUpdate from "./FooterAgendaUpdate";
 
 
 
 const EditarAgenda = () => {
 
-    const [id, setId] = useState<string>()
-    const [profissional_id, setProfissional_id] = useState<string>()
+    const [id, setId] = useState<number>()
+    const [profissional_id, setProfissional_id] = useState<string>("")
     const [data_hora, setData_hora] = useState<string>("")
 
 
@@ -35,7 +35,26 @@ const EditarAgenda = () => {
                 "Content-Type": "applcation/json"
             }
         }).then(function(response){
-            window.location.href = "/ListagemAgenda"
+            if(response.data.status === true){
+                Swal.fire({
+                    title: "Concluído",
+                    text: "Agenda Atualizada",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+                window.setTimeout(() => {
+                    window.location.href = "/ListagemAgenda"
+                }, 1000);
+            } else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",   
+                    text: "Alguma coisa está errada",
+                  });
+                console.log("error");
+                console.log(response.data.error);
+            }
         }).catch(function(error){
             console.log('Ocorreu um erro ao atualizar');
         })
@@ -76,7 +95,7 @@ const EditarAgenda = () => {
                             <h5 className='card-title'>Atualizar Agenda</h5>
                             <form onSubmit={atualizar} className='row g-3'>
                                 <div className='col-6'>
-                                    <label htmlFor="Profissional_id" className='form-label'>ID do Profissional</label>
+                                    <label htmlFor="profissional_id" className='form-label'>ID do Profissional</label>
                                     <input type="text" name='profissional_id' className='form-control' required onChange={handleState} value={profissional_id} />
                                 </div>
                                 <div className='col-6'>
@@ -96,4 +115,4 @@ const EditarAgenda = () => {
     );
 }
 
-export default EditarAgenda;
+export default EditarAgenda

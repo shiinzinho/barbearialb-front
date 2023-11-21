@@ -67,7 +67,7 @@ const ListagemCliente = () => {
     return (
         <div>
             <main className={styles.main}>
-                <div className='container'>
+                <div className='container mw-100 w-auto'>
                     <div className='col-md mb-4'>
                         <div className='card'>
                             <div className='card-body'>
@@ -105,6 +105,7 @@ const ListagemCliente = () => {
                                         <th>Número</th>
                                         <th>Bairro</th>
                                         <th>Complemento</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -127,6 +128,7 @@ const ListagemCliente = () => {
                                             <td>
                                                 <Link to={"/EditarCliente/" + usuario.id} className='btn btn-primary btn-sm'>Editar</Link>
                                                 <a onClick={e => handleDelete(usuario.id)} className='btn btn-danger btn-sm'>Excluir</a>
+                                                <a onClick={e => handleDelete(usuario.id)} className='btn btn-dark btn-sm'>Recuperar Senha</a>
                                             </td>
                                         </tr>
                                     ))}

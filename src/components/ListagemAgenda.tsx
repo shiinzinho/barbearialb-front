@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const ListagemAgenda = () => {
     const [usuarios, setUsuarios] = useState<CadastroAgendaInterface[]>([]);
+    const [pesquisa, setPesquisa] = useState<string>('');
     const [error, setError] = useState("");
     const navigate = useNavigate()
 
@@ -20,6 +21,34 @@ const ListagemAgenda = () => {
         }).catch(function(error){
             console.log('Ocorreu um erro ao excluir');
         })
+    }
+    const handleState = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.name === "pesquisa") {
+            setPesquisa(e.target.value);
+        }
+    }
+      const buscar = (e: FormEvent) => {
+        e.preventDefault();
+
+        async function fetchData() {
+            try {
+                const response = await axios.post('http://127.0.0.1:8000/api/schedule/date',
+                    { data_hora: pesquisa },
+                    {
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json"
+                        }
+                    }).then(function (response) {
+                        setUsuarios(response.data.data);
+                    }).catch(function (error) {
+                        console.log(error);
+                    })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
     }
     useEffect(() => {
         async function fetchData() {
@@ -36,9 +65,22 @@ const ListagemAgenda = () => {
     return (
         <div>
             <main className={styles.main}>
-                <div className='container'>
+                <div className='container mw-100 w-auto'>
                     <div className='col-md mb-4'>
                         <div className='card'>
+                        <div className='card-body'>
+                                <div className='card-title'>
+                                    <h5>Pesquisar</h5>
+                                    <form className='row' onSubmit={buscar}>
+                                        <div className='col-10'>
+                                            <input type="text" name='pesquisa' className='form-control' onChange={handleState} />
+                                        </div>
+                                        <div className='col-1'>
+                                            <button type='submit' className='btn btn-success'>Pesquisar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className='card'>
@@ -47,6 +89,7 @@ const ListagemAgenda = () => {
                             <table className='table table-hover'>
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>ID do Profissional</th>
                                         <th>Data e Hora</th>
                                         <th>Ações</th>
@@ -55,6 +98,7 @@ const ListagemAgenda = () => {
                                 <tbody>
                                     {usuarios.map(usuario => (
                                         <tr key={usuario.id}>
+                                            <td>{usuario.id}</td>
                                             <td>{usuario.profissional_id}</td>
                                             <td>{usuario.data_hora}</td>
                                             <td>

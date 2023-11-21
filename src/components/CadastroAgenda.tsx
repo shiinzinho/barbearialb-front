@@ -20,7 +20,7 @@ const CadastroAgenda = () => {
         data_hora: data_hora,
     }
     
-    axios.post('http://127.0.0.1:8000/api/schedule', dados, {
+    axios.post('http://127.0.0.1:8000/api/schedule/time', dados, {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -30,7 +30,7 @@ const CadastroAgenda = () => {
             console.log("error");
             console.log(response.data.error);
         } else {
-            window.location.href = "#"
+            window.location.href = "/ListagemAgenda"
         }
     }).catch(function (error) {
         console.log(error);;

@@ -66,7 +66,7 @@ const ListagemServico = () => {
     return (
         <div>
             <main className={styles.main}>
-                <div className='container'>
+                <div className='container mw-100 w-auto'>
                     <div className='col-md mb-4'>
                         <div className='card'>
                             <div className='card-body'>
@@ -95,6 +95,7 @@ const ListagemServico = () => {
                                         <th>Descrição</th>
                                         <th>Duração</th>
                                         <th>Preço</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
