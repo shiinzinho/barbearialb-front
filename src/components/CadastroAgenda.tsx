@@ -5,6 +5,7 @@ import Header from './Header';
 import styles from '../App.module.css'
 import axios from 'axios';
 import FooterAgenda from './FooterAgenda';
+import Swal from 'sweetalert2';
 
 const CadastroAgenda = () => {
 
@@ -26,11 +27,25 @@ const CadastroAgenda = () => {
             "Content-Type": "application/json"
         }
     }).then(function (response) {
-        if (response.data.success = false) {
+        if (response.data.success === false) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Alguma coisa está errada",
+              });
             console.log("error");
             console.log(response.data.error);
         } else {
-            window.location.href = "/ListagemAgenda"
+            Swal.fire({
+                title: "Concluído",
+                text: "Agendamento Cadastrado",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000
+              });
+            window.setTimeout(() => {
+                window.location.href = "/ListagemAgenda"
+            }, 1000);
         }
     }).catch(function (error) {
         console.log(error);;
