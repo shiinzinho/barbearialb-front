@@ -48,7 +48,7 @@ const CadastroAgenda = () => {
             }, 1000);
         }
     }).catch(function (error) {
-        console.log(error);;
+        console.log(error);
     })
 }
 

@@ -42,6 +42,30 @@ const ListagemCliente = () => {
                 console.log('Ocorreu um erro ao excluir');
             })}});
     }
+    const recuperarSenha = async (id: number) => {
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/client/restore', {
+                id: id,
+            });
+            if (response.data.status === true) {
+                Swal.fire({
+                    title: "Concluído",
+                    text: "Senha Redefinida",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Erro",
+                    text: "Ocorreu um erro ao redefinir a senha... Tente novamente mais tarde.",
+                  });
+            }
+        } catch (error) {
+            console.error("Erro ao redefinir a senha", error);
+        }
+    }
 
     const handleState = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === "pesquisa") {
@@ -108,7 +132,7 @@ const ListagemCliente = () => {
                     </div>
                     <div className='card'>
                         <div className='card-body'>
-                            <h5 className='card-title'>Listagem de usuários</h5>
+                            <h5 className='card-title'>Listagem de Clientes</h5>
                             <table className='table table-hover'>
                                 <thead>
                                     <tr>
@@ -154,10 +178,10 @@ const ListagemCliente = () => {
   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
   <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
 </svg></a>
-                                                <Link to={"/RecuperarSenhaCliente/" + usuario.id} className='btn btn-dark btn-sm m-1'><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-bootstrap-reboot" viewBox="0 0 16 16">
+                                                <button onClick={() => recuperarSenha(usuario.id)} className='btn btn-dark btn-sm m-1'><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-bootstrap-reboot" viewBox="0 0 16 16">
   <path d="M1.161 8a6.84 6.84 0 1 0 6.842-6.84.58.58 0 1 1 0-1.16 8 8 0 1 1-6.556 3.412l-.663-.577a.58.58 0 0 1 .227-.997l2.52-.69a.58.58 0 0 1 .728.633l-.332 2.592a.58.58 0 0 1-.956.364l-.643-.56A6.812 6.812 0 0 0 1.16 8z"/>
   <path d="M6.641 11.671V8.843h1.57l1.498 2.828h1.314L9.377 8.665c.897-.3 1.427-1.106 1.427-2.1 0-1.37-.943-2.246-2.456-2.246H5.5v7.352zm0-3.75V5.277h1.57c.881 0 1.416.499 1.416 1.32 0 .84-.504 1.324-1.386 1.324h-1.6z"/>
-</svg></Link>
+</svg></button>
                                             </td>
                                         </tr>
                                     ))}

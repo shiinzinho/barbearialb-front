@@ -107,7 +107,7 @@ const ListagemServico = () => {
                     </div>
                     <div className='card'>
                         <div className='card-body'>
-                            <h5 className='card-title'>Listagem de usuários</h5>
+                            <h5 className='card-title'>Listagem de Serviços</h5>
                             <table className='table table-hover'>
                                 <thead>
                                     <tr>
