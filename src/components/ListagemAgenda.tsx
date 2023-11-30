@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const ListagemAgenda = () => {
+    const [selectedProfissional, setSelectedProfissional] = useState('');
     const [usuarios, setUsuarios] = useState<CadastroAgendaInterface[]>([]);
     const [pesquisa, setPesquisa] = useState<string>('');
     const [error, setError] = useState("");
@@ -53,18 +54,18 @@ const ListagemAgenda = () => {
 
         async function fetchData() {
             try {
-                const response = await axios.post('http://127.0.0.1:8000/api/schedule/all',
-                    { data_hora: pesquisa },
+                const response = await axios.post('http://127.0.0.1:8000/api/schedule/find/time/professional',
+                { profissional_id: selectedProfissional, data_hora: pesquisa },
                     {
                         headers: {
                             "Accept": "application/json",
                             "Content-Type": "application/json"
                         }
                     }).then(function (response) {
-                        if (response.data.status) {
+                        if (response.data.status === true) {
                             setUsuarios(response.data.data);
                         } else {
-                            console.log("Erro");
+                            setUsuarios([]);
                         }
                     }).catch(function (error) {
                         console.log(error);
@@ -78,7 +79,7 @@ const ListagemAgenda = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/schedule/find/time/professional');
+                const response = await axios.get('http://127.0.0.1:8000/api/schedule/all');
                 if (response.data.status) {
                     setUsuarios(response.data.data)
                 } else {
@@ -95,6 +96,21 @@ const ListagemAgenda = () => {
         <div>
             <main className={styles.main}>
                 <div className='container mw-100 w-auto'>
+                <div className='col-12'>
+                        <select
+                            className='form-control'
+                            value={selectedProfissional}
+                            onChange={(e) => setSelectedProfissional(e.target.value)}
+                        >
+                            <option value='0'>Todos os Profissionais</option>
+                            <option value='1'>Profissional 1</option>
+                            <option value='2'>Profissional 2</option>
+                        </select>
+                    </div>
+                    <div className='col-12'>
+                        <input type="datetime-local" name='pesquisa' className='form-control' onChange={handleState} />
+                    </div>
+
                     <div className='col-md mb-4'>
                         <div className='card'>
                             <div className='card-body'>

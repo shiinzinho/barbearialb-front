@@ -90,7 +90,7 @@ const CadastroAgenda = () => {
                         </div>
                     </div>
                 </div>
-            </main>
+            </main >
             <FooterAgenda />
         </div>
     );

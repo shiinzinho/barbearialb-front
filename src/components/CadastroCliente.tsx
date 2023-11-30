@@ -211,7 +211,7 @@ const CadastroCliente = () => {
         <div>
             <Header />
             <main className={styles.main}>
-                <div className='container'>
+                <div className='container mw-100 w-auto h-100'>
                     <div className='card'>
                         <div className='card-body'>
                             <h5 className='card-title'>Cadastrar Cliente</h5>
@@ -244,47 +244,47 @@ const CadastroCliente = () => {
                                 <div className='col-4'>
                                     <label htmlFor="cep" className='form-label'>CEP</label>
                                     <input type="text" name='cep' className='form-control' required onBlur={findCep} onChange={handleState} />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{cepErro}</div>
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="cidade" className='form-label'>Cidade</label>
                                     <input type="text" name='cidade' value={cidade} className='form-control' required onChange={handleState} />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{cidadeErro}</div>
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="estado" className='form-label'>Estado</label>
                                     <input type="text" name='estado' value={estado} className='form-control' required onChange={handleState} />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{estadoErro}</div>
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="pais" className='form-label'>País</label>
                                     <input type="text" name='pais' className='form-control' required onChange={handleState} />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{paisErro}</div>
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="rua" className='form-label'>Rua</label>
                                     <input type="text" name='rua' className='form-control' required onChange={handleState} />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{ruaErro}</div>
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="numero" className='form-label'>Número</label>
                                     <input type="text" name='numero' className='form-control' required onChange={handleState} />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{numeroErro}</div>
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="bairro" className='form-label'>Bairro</label>
                                     <input type="text" name='bairro' className='form-control' required onChange={handleState} />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{bairroErro}</div>
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="complemento" className='form-label'>Complemento</label>
                                     <input type="text" name='complemento' className='form-control' required onChange={handleState} />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{complementoErro}</div>
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="senha" className='form-label'>Senha</label>
                                     <input type="password" name='senha' className='form-control' required onChange={handleState} />
-                                    <div className='text-danger'>{nomeErro}</div>
+                                    <div className='text-danger'>{senhaErro}</div>
                                 </div>
                                 <div className='col-12'>
                                     <button type='submit' className='btn btn-success btn-sm' >Cadastrar</button>
