@@ -53,7 +53,7 @@ const ListagemAgenda = () => {
 
         async function fetchData() {
             try {
-                const response = await axios.post('http://127.0.0.1:8000/api/schedule/date',
+                const response = await axios.post('http://127.0.0.1:8000/api/schedule/all',
                     { data_hora: pesquisa },
                     {
                         headers: {
@@ -78,7 +78,7 @@ const ListagemAgenda = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/schedule/all');
+                const response = await axios.get('http://127.0.0.1:8000/api/schedule/find/time/professional');
                 if (response.data.status) {
                     setUsuarios(response.data.data)
                 } else {

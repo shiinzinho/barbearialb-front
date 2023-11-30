@@ -29,7 +29,7 @@ const RecuperarSenhaCliente = () => {
             "Content-Type": "application/json"
         }
     }).then(function (response) {
-        if (response.data.success === false) {
+        if (response.data.stauts === false) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

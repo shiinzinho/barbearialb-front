@@ -25,18 +25,28 @@ const ListagemProfissional = () => {
             confirmButtonText: "Sim, tenho certeza!"
           }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                title: "Deletado!",
-                text: "O dado foi deletado.",
-                icon: "success",
-                showConfirmButton: false,
-                timer: 2000
-              });
               axios.delete('http://127.0.0.1:8000/api/professional/delete/' + id)
               .then(function(response){
+                if (response.data.status === false){
+                    Swal.fire({
+                        title: "Erro!",
+                        text: "Este ID ainda têm agendamentos.",
+                        icon: "error",
+                        showConfirmButton: false,
+                        timer: 2000
+                      });
+                } else {
+                    Swal.fire({
+                        title: "Concluído!",
+                        text: "O dado foi deletado.",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 2000
+                      });
                 window.setTimeout(() => {
                     window.location.href = "/ListagemProfissional"
                 }, 500);
+            }
             }).catch(function(error){
                 console.log('Ocorreu um erro ao excluir');
             })}});

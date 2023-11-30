@@ -29,7 +29,7 @@ const RecuperarSenhaProfissional = () => {
             "Content-Type": "application/json"
         }
     }).then(function (response) {
-        if (response.data.success === false) {
+        if (response.data.status === false) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

@@ -27,11 +27,11 @@ const CadastroAgenda = () => {
             "Content-Type": "application/json"
         }
     }).then(function (response) {
-        if (response.data.success === false) {
+        if (response.data.status === false) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Alguma coisa está errada",
+                text: "Horário já cadastrado",
               });
             console.log("error");
             console.log(response.data.error);
@@ -48,7 +48,12 @@ const CadastroAgenda = () => {
             }, 1000);
         }
     }).catch(function (error) {
-        console.log(error);
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "ID do profissional não existente",
+          });
+        console.log("error");
     })
 }
 
