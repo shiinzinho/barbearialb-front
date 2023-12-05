@@ -223,17 +223,17 @@ const CadastroCliente = () => {
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="celular" className='form-label'>Celular</label>
-                                    <input type="text" name='celular' className='form-control' required onChange={handleState} />
+                                    <input type="number" name='celular' className='form-control' required onChange={handleState} />
                                     <div className='text-danger'>{celularErro}</div>
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="email" className='form-label'>E-mail</label>
-                                    <input type="text" name='email' className='form-control' required onChange={handleState} />
+                                    <input type="email" name='email' className='form-control' required onChange={handleState} />
                                     <div className='text-danger'>{emailErro}</div>
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="cpf" className='form-label'>CPF</label>
-                                    <input type="text" name='cpf' className='form-control' required onChange={handleState} />
+                                    <input type="number" name='cpf' className='form-control' required onChange={handleState} />
                                     <div className='text-danger'>{cpfErro}</div>
                                 </div>
                                 <div className='col-4'>
@@ -243,7 +243,7 @@ const CadastroCliente = () => {
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="cep" className='form-label'>CEP</label>
-                                    <input type="text" name='cep' className='form-control' required onBlur={findCep} onChange={handleState} />
+                                    <input type="number" name='cep' className='form-control' required onBlur={findCep} onChange={handleState} />
                                     <div className='text-danger'>{cepErro}</div>
                                 </div>
                                 <div className='col-4'>
@@ -268,7 +268,7 @@ const CadastroCliente = () => {
                                 </div>
                                 <div className='col-4'>
                                     <label htmlFor="numero" className='form-label'>Número</label>
-                                    <input type="text" name='numero' className='form-control' required onChange={handleState} />
+                                    <input type="decimal" name='numero' className='form-control' required onChange={handleState} />
                                     <div className='text-danger'>{numeroErro}</div>
                                 </div>
                                 <div className='col-4'>

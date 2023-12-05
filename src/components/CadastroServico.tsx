@@ -24,7 +24,6 @@ const CadastroServico = () => {
         setDescricaoErro("")
         setDuracaoErro("")
         setPrecoErro("")
-        
         e.preventDefault();
 
     
