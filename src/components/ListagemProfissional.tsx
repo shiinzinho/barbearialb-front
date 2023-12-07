@@ -94,7 +94,27 @@ const ListagemProfissional = () => {
                         "Content-Type" : "application/json"
                     }
                 }).then(function(response){
-                    setProfissionais(response.data.data);
+                    if(response.data.data){
+                        setProfissionais(response.data.data);
+                    }
+                    else {
+                        setProfissionais([])
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-start",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: "error",
+                            title: response.data.message
+                        });
+                    }
                 }).catch(function(error){
                     console.log(error);
                 })

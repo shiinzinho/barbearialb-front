@@ -57,7 +57,7 @@ const ListagemAgenda = () => {
         async function fetchData() {
             try {
                 const response = await axios.post('http://127.0.0.1:8000/api/schedule/find/time/professional',
-                { profissional_id: selectedProfissional, data_hora: pesquisa },
+                    { profissional_id: selectedProfissional, data_hora: pesquisa },
                     {
                         headers: {
                             "Accept": "application/json",
@@ -87,7 +87,7 @@ const ListagemAgenda = () => {
                 if (response.data.status) {
                     setHorarios(response.data.data)
                 } else {
-                    console.log("Erro");
+                    setHorarios([])
                 }
             } catch (error) {
                 setError("Ocorreu um erro");
@@ -100,29 +100,25 @@ const ListagemAgenda = () => {
         <div>
             <main className={styles.main}>
                 <div className='container mw-100 w-auto'>
-                <div className='col-12'>
-                        <select
-                            className='form-control'
-                            value={selectedProfissional}
-                            onChange={(e) => setSelectedProfissional(e.target.value)}
-                        >
-                            <option value='0'>Todos os Profissionais</option>
-                            {profissionais.map(profissionais => (
-                                <option key={profissionais.id} value={profissionais.id}>{profissionais.nome}</option>))}
-                        </select>
-                    </div>
                     <div className='col-12'>
-                        <input type="datetime-local" name='pesquisa' className='form-control' onChange={handleState} />
                     </div>
-
                     <div className='col-md mb-4'>
                         <div className='card'>
                             <div className='card-body'>
                                 <div className='card-title'>
                                     <h5>Pesquisar</h5>
-                                    <form className='row' onSubmit={buscar}>
+                                    <form className='row m-2' onSubmit={buscar}>
                                         <div className='col-11'>
-                                            <input type="text" name='pesquisa' className='form-control' onChange={handleState} />
+                                            <select
+                                                className='form-control'
+                                                value={selectedProfissional}
+                                                onChange={(e) => setSelectedProfissional(e.target.value)}
+                                            >
+                                                <option value='0'>Todos os Profissionais</option>
+                                                {profissionais.map(profissionais => (
+                                                    <option key={profissionais.id} value={profissionais.id}>{profissionais.nome}</option>))}
+                                            </select>
+                                            <input type="datetime-local" name='pesquisa' className='form-control' onChange={handleState} />
                                         </div>
                                         <div className='col-1'>
                                             <button type='submit' className='btn btn-success'><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">

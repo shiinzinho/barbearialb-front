@@ -31,6 +31,11 @@ const CadastroAgenda = () => {
             "Content-Type": "application/json"
         }
     }).then(function (response) {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Erro nos formulários",
+          });
         if (response.data.status === false) {
             if('profissional_id' in response.data.error){
                 setProfissional_idErro(response.data.error.profissional_id[0])
@@ -38,11 +43,6 @@ const CadastroAgenda = () => {
             if('data_hora' in response.data.error){
                 setData_horaErro(response.data.error.data_hora[0])
             }
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Alguma coisa está errada",
-              });
             console.log("error");
             console.log(response.data.error);
         } else {
@@ -58,6 +58,11 @@ const CadastroAgenda = () => {
             }, 1000);
         }
     }).catch(function (error) {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Erro nos formulários",
+          });
         console.log(error);;
     })
 }

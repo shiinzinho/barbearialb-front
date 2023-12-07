@@ -113,7 +113,7 @@ const CadastroServico = () => {
                                 </div>
                                 <div className='col-6'>
                                     <label htmlFor="duracao" className='form-label'>Duração</label>
-                                    <input type="text" name='duracao' className='form-control' required onChange={handleState}/>
+                                    <input type="number" name='duracao' className='form-control' required onChange={handleState}/>
                                     <div className='text-danger'>{duracaoErro}</div>
                                 </div>
                                 <div className='col-6'>
