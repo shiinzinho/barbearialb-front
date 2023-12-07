@@ -66,6 +66,12 @@ const EditarAgenda = () => {
                 }, 1000);
             }
         }).catch(function (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Alguma coisa está errada",
+              });
+            console.log("error");
             console.log(error);;
         })
     }
